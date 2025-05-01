@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Portfolio Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-mode">
+  <header>
+    <div class="header-content">
+      <h1>Professional Portfolio</h1>
+      <div class="header-options">
+        <select id="language-selector">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+        </select>
+        <button id="theme-toggle">Toggle Dark/Light Mode</button>
+        <button id="home-btn" style="display: none;">Home</button>
+        <button id="logout-btn" style="display: none;">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Form -->
+  <div id="login-form" class="form-container">
+    <h2>Login to Access Your Portfolio</h2>
+    <form id="login">
+      <input type="email" id="login-email" placeholder="Enter your email" required>
+      <input type="password" id="login-password" placeholder="Enter your password" required>
+      <progress id="password-strength" value="0" max="100"></progress>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="javascript:void(0);" id="go-to-signup">Sign Up</a></p>
+  </div>
+
+  <!-- Sign Up Form -->
+  <div id="signup-form" class="form-container" style="display: none;">
+    <h2>Sign Up to Build Your Portfolio</h2>
+    <form id="signup">
+      <input type="email" id="signup-email" placeholder="Enter your email" required>
+      <input type="password" id="signup-password" placeholder="Create a password" required>
+      <input type="password" id="confirm-password" placeholder="Confirm password" required>
+      <progress id="signup-password-strength" value="0" max="100"></progress>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="javascript:void(0);" id="go-to-login">Login</a></p>
+  </div>
+
+  <!-- Portfolio Form -->
+  <div id="portfolio-form" class="form-container" style="display: none;">
+    <h2>Your Professional Portfolio</h2>
+    <nav>
+      <button id="tab-about" data-target="about-section">About</button>
+      <button id="tab-skills" data-target="skills-section">Skills</button>
+      <button id="tab-education" data-target="education-section">Education</button>
+      <button id="tab-experience" data-target="experience-section">Experience</button>
+      <button id="tab-projects" data-target="projects-section">Projects</button>
+    </nav>
+
+    <form id="portfolio">
+      <div id="about-section" class="portfolio-tab-section">
+        <label for="full-name">Full Name:</label>
+        <input type="text" id="full-name" required>
+
+        <label for="contact-info">Contact Information:</label>
+        <input type="text" id="contact-info" required>
+
+        <label for="linkedin">LinkedIn Profile:</label>
+        <input type="url" id="linkedin" placeholder="https://www.linkedin.com/in/yourprofile">
+
+        <label for="photo">Upload Professional Photo:</label>
+        <input type="file" id="photo" accept=".jpg, .png" required>
+        <img id="image-preview" src="" alt="Photo Preview" style="max-width: 200px; margin-top: 10px;" />
+        <canvas id="canvas" style="display: none;"></canvas>
+
+        <label for="bio">Professional Summary:</label>
+        <textarea id="bio" placeholder="Brief summary about your professional background"></textarea>
+      </div>
+
+      <div id="skills-section" class="portfolio-tab-section" style="display: none;">
+        <h3>Skills</h3>
+        <input type="text" id="soft-skills" placeholder="e.g., Communication, Teamwork">
+        <input type="text" id="technical-skills" placeholder="e.g., Java, Python, SQL">
+      </div>
+
+      <div id="education-section" class="portfolio-tab-section" style="display: none;">
+        <h3>Education</h3>
+        <input type="text" id="institute" placeholder="Institution">
+        <input type="text" id="degree" placeholder="Degree">
+        <input type="text" id="year" placeholder="Graduation Year">
+        <input type="text" id="grade" placeholder="GPA or Grade">
+      </div>
+
+      <div id="experience-section" class="portfolio-tab-section" style="display: none;">
+        <h3>Work Experience</h3>
+        <div id="work-experience-container"></div>
+        <button type="button" id="add-work-experience">Add Work Experience</button>
+      </div>
+
+      <div id="projects-section" class="portfolio-tab-section" style="display: none;">
+        <h3>Projects & Publications</h3>
+        <textarea id="projects" placeholder="List your projects, articles, or papers"></textarea>
+        <button type="button" id="download-pdf">Download as PDF</button>
+      </div>
+    </form>
+
+    <section id="portfolio-preview">
+      <h2>Live Portfolio Preview</h2>
+      <div id="preview-content"></div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Professional Portfolio Generator</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
